@@ -67,15 +67,15 @@ namespace Кадровый_учет
             Console.WriteLine("введите Ф.И.О.");
             input = Console.ReadLine();
             
-            AddEmployee(ref namesData, input);
+            GetEnlargedArray(ref namesData, input);
             
             Console.WriteLine("введите должность");
             input = Console.ReadLine();
             
-            AddEmployee(ref position, input);
+            GetEnlargedArray(ref position, input);
         }
 
-        static void AddEmployee(ref string[] data, string input)
+        static void GetEnlargedArray(ref string[] data, string input)
         {
             string[] tempData = new string[data.Length + 1];
 
@@ -101,11 +101,11 @@ namespace Кадровый_учет
              Console.Write("удаление сотрудника из базы данных. выберете номер:");
              input = Console.ReadLine();
 
-             RemoveEmployee(ref namesData, input);
-             RemoveEmployee(ref position, input);
+             GetReducedArray(ref namesData, input);
+             GetReducedArray(ref position, input);
         }
 
-        static void RemoveEmployee(ref string[] data, string input)
+        static void GetReducedArray(ref string[] data, string input)
         {
             if (int.TryParse(input, out int index))
             {
