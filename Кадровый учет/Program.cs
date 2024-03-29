@@ -67,10 +67,11 @@ namespace Кадровый_учет
             Console.WriteLine("введите Ф.И.О.");
             input = Console.ReadLine();
             
+            AddEmployee(ref namesData, input);
+            
             Console.WriteLine("введите должность");
             input = Console.ReadLine();
-
-            AddEmployee(ref namesData, input);
+            
             AddEmployee(ref position, input)
         }
 
