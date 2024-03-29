@@ -72,7 +72,7 @@ namespace Кадровый_учет
             Console.WriteLine("введите должность");
             input = Console.ReadLine();
             
-            AddEmployee(ref position, input)
+            AddEmployee(ref position, input);
         }
 
         static void AddEmployee(ref string[] data, string input)
@@ -108,9 +108,13 @@ namespace Кадровый_учет
         static void RemoveEmployee(ref string[] data, string input)
         {
             if (int.TryParse(input, out int index))
+            {
                 if (index > data.Length || index <= 0)
+                {
                    Console.WriteLine("неправильный ввод");
-               else
+                }
+            }
+            else
               {
                 string[] tempBase = new string[data.Length - 1];
 
@@ -128,12 +132,10 @@ namespace Кадровый_учет
         {
             Console.Write("Введите фамилию: ");
             input = Console.ReadLine();
-
-            char empty = ' ';
             
             for (int i = 0; i < namesData.Length; i++)
             {
-                string[] name = namesData[i].Split(empty);
+                string[] name = namesData[i].Split();
 
                 if (name[0] == input)
                     Console.WriteLine($"сотрудник {i + 1}: {namesData[i]} - {position[i]}");
