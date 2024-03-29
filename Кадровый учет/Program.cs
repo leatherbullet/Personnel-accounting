@@ -113,19 +113,19 @@ namespace Кадровый_учет
                 {
                    Console.WriteLine("неправильный ввод");
                 }
-            }
-            else
-              {
-                string[] tempBase = new string[data.Length - 1];
+                else
+                {
+                  string[] tempBase = new string[data.Length - 1];
 
-                for (int i = 0; i < index - 1; i++)
+                  for (int i = 0; i < index - 1; i++)
                        tempBase[i] = data[i];
 
-                for (int i = index; i < data.Length; i++)
-                tempBase[i - 1] = data[i];
+                  for (int i = index; i < data.Length; i++)
+                       tempBase[i - 1] = data[i];
 
-                data = tempBase;
-               }
+                     data = tempBase;
+                }
+            }
         }
         
         static void SearchSurname(string[] namesData, string[] position, string input)
