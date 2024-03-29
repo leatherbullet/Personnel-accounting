@@ -10,10 +10,10 @@ namespace Кадровый_учет
     {
         static void Main(string[] args)
         {
-            const string CommandAdd = "1";
-            const string CommandShowAll = "2";
-            const string CommandDelite = "3";
-            const string CommandSearch = "4";
+            const string CommandAddEmployees = "1";
+            const string CommandShowAllDossier = "2";
+            const string CommandDeliteDossier = "3";
+            const string CommandSearchBySurname = "4";
             const string CommandExit = "5";
 
             string[] employeesNames = new string[0];
@@ -23,28 +23,28 @@ namespace Кадровый_учет
 
             while (isWork)
             {
-                Console.WriteLine($"{CommandAdd}: добавить досье");
-                Console.WriteLine($"{CommandShowAll}: вывести все досье");
-                Console.WriteLine($"{CommandDelite}: удалить досье");
-                Console.WriteLine($"{CommandSearch}: поиск по фамилии");
+                Console.WriteLine($"{CommandAddEmployees}: добавить досье");
+                Console.WriteLine($"{CommandShowAllDossier}: вывести все досье");
+                Console.WriteLine($"{CommandDeliteDossier}: удалить досье");
+                Console.WriteLine($"{CommandSearchBySurname}: поиск по фамилии");
                 Console.WriteLine($"{CommandExit}: выход");
                 userInput = Console.ReadLine();
 
                 switch (userInput)
                 {
-                    case CommandAdd:
+                    case CommandAddEmployees:
                         AddDossier(ref employeesNames, ref employeesPosition, userInput);
                         break;
 
-                    case CommandShowAll:
+                    case CommandShowAllDossier:
                         ShowAllEmployees(employeesNames, employeesPosition);
                         break;
 
-                    case CommandDelite:
+                    case CommandDeliteDossier:
                         DeliteEmployee(ref employeesNames, ref employeesPosition, userInput);
                         break;
 
-                    case CommandSearch:
+                    case CommandSearchBySurname:
                         SearchSurname(employeesNames, employeesPosition, userInput);
                         break;
 
@@ -62,20 +62,20 @@ namespace Кадровый_учет
             }
         }
 
-        static void AddDossier(ref string[] namesData, ref string[] position, string input)
+        static void AddDossier(ref string[] namesData, ref string[] position)
         {
             Console.WriteLine("введите Ф.И.О.");
-            input = Console.ReadLine();
+            string input = Console.ReadLine();
             
-            GetEnlargedArray(ref namesData, input);
+            AddData(ref namesData, input);
             
             Console.WriteLine("введите должность");
             input = Console.ReadLine();
             
-            GetEnlargedArray(ref position, input);
+            AddData(ref position, input);
         }
 
-        static void GetEnlargedArray(ref string[] data, string input)
+        static void AddData(ref string[] data, string input)
         {
             string[] tempData = new string[data.Length + 1];
 
@@ -94,21 +94,21 @@ namespace Кадровый_учет
                 Console.WriteLine($"{i + 1}: {namesData[i]} - {position[i]}");
         }
 
-        static void DeliteEmployee(ref string[] namesData, ref string[] position, string input)
+        static void DeliteEmployee(ref string[] namesData, ref string[] position)
         {
              ShowAllEmployees(namesData, position);
 
              Console.Write("удаление сотрудника из базы данных. выберете номер:");
-             input = Console.ReadLine();
+             string input = Console.ReadLine();
 
-             GetReducedArray(ref namesData, input);
-             GetReducedArray(ref position, input);
+            if (int.TryParse(input, out int index))
+
+             DeleteData(ref namesData, index);
+             DeleteData(ref position, index);
         }
 
-        static void GetReducedArray(ref string[] data, string input)
+        static void DeleteData(ref string[] data, string input)
         {
-            if (int.TryParse(input, out int index))
-            {
                 if (index > data.Length || index <= 0)
                 {
                    Console.WriteLine("неправильный ввод");
@@ -125,21 +125,28 @@ namespace Кадровый_учет
 
                      data = tempBase;
                 }
-            }
         }
         
         static void SearchSurname(string[] namesData, string[] position, string input)
         {
             Console.Write("Введите фамилию: ");
             input = Console.ReadLine();
-            
+
+            bool canFind = false;
+        
             for (int i = 0; i < namesData.Length; i++)
             {
                 string[] name = namesData[i].Split();
 
                 if (name[0] == input)
+                {
+                    canFind = true;
                     Console.WriteLine($"сотрудник {i + 1}: {namesData[i]} - {position[i]}");
+                }
             }
+
+            if (canFind == false)
+                Console.WriteLine("сотрудника с такой фамилией нет");
         }
     }
 }
