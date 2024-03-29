@@ -33,7 +33,7 @@ namespace Кадровый_учет
                 switch (userInput)
                 {
                     case CommandAddEmployees:
-                        AddDossier(ref employeesNames, ref employeesPosition, userInput);
+                        AddDossier(ref employeesNames, ref employeesPosition);
                         break;
 
                     case CommandShowAllDossier:
@@ -41,11 +41,11 @@ namespace Кадровый_учет
                         break;
 
                     case CommandDeliteDossier:
-                        DeliteEmployee(ref employeesNames, ref employeesPosition, userInput);
+                        DeliteEmployee(ref employeesNames, ref employeesPosition);
                         break;
 
                     case CommandSearchBySurname:
-                        SearchSurname(employeesNames, employeesPosition, userInput);
+                        SearchSurname(employeesNames, employeesPosition);
                         break;
 
                     case CommandExit:
@@ -102,19 +102,21 @@ namespace Кадровый_учет
              string input = Console.ReadLine();
 
             if (int.TryParse(input, out int index))
-
-             DeleteData(ref namesData, index);
-             DeleteData(ref position, index);
-        }
-
-        static void DeleteData(ref string[] data, string input)
-        {
+            {
                 if (index > data.Length || index <= 0)
                 {
-                   Console.WriteLine("неправильный ввод");
+                    Console.WriteLine("неправильный ввод");
                 }
                 else
                 {
+                    DeleteData(ref namesData, index);
+                    DeleteData(ref position, index);
+                }
+            }   
+        }
+
+        static void DeleteData(ref string[] data, int index)
+        {
                   string[] tempBase = new string[data.Length - 1];
 
                   for (int i = 0; i < index - 1; i++)
@@ -124,13 +126,12 @@ namespace Кадровый_учет
                        tempBase[i - 1] = data[i];
 
                      data = tempBase;
-                }
         }
         
-        static void SearchSurname(string[] namesData, string[] position, string input)
+        static void SearchSurname(string[] namesData, string[] position)
         {
             Console.Write("Введите фамилию: ");
-            input = Console.ReadLine();
+            string input = Console.ReadLine();
 
             bool canFind = false;
         
