@@ -62,7 +62,7 @@ namespace Кадровый_учет
             }
         }
 
-        static void AddDossier(ref string[] dataBase, ref string[] position, string input)
+        static void AddDossier(ref string[] namesData, ref string[] position, string input)
         {
             Console.WriteLine("введите Ф.И.О.");
             input = Console.ReadLine();
