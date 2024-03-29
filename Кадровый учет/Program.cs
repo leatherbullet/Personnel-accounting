@@ -103,7 +103,7 @@ namespace Кадровый_учет
 
             if (int.TryParse(input, out int index))
             {
-                if (index > data.Length || index <= 0)
+                if (index > namesData.Length || index <= 0)
                 {
                     Console.WriteLine("неправильный ввод");
                 }
